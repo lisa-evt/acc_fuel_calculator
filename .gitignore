@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Виртуальное окружение
+venv/
+env/
+
+# Kivy / сборка
+*.log
+*.kv.cache
+*.pyc
+
+# PyInstaller / exe сборка
+dist/
+build/
+*.spec
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Системные файлы
+.DS_Store
+Thumbs.db
