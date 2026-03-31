@@ -6,7 +6,14 @@ from constants import MIN_SPRINT_RACE_DURATION, MAX_SPRINT_RACE_DURATION
 
 class FuelCalculatorApp(App):
 
+    def switch_to_endurance(self):
+        self.root.current = 'endurance'
+
+    def switch_to_sprint(self):
+        self.root.current = 'sprint'
+
     def calculate(self):
+
         race_duration = self.root.ids.race_time.text
         lap_time = self.root.ids.lap_time.text
         fuel_per_lap = self.root.ids.fuel_per_lap.text
