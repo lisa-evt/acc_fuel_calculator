@@ -13,15 +13,15 @@ from constants import MIN_SPRINT_RACE_DURATION, MAX_SPRINT_RACE_DURATION
 class FuelCalculatorApp(App):
     """Main Kivy application that handles screen switching"""
 
-    def switch_to_endurance(self):
+    def switch_to_endurance(self) -> None:
         """Switch UI to the endurance screen."""
         self.root.current = 'endurance'
 
-    def switch_to_sprint(self):
+    def switch_to_sprint(self) -> None:
         """Switch UI to the sprint screen."""
         self.root.current = 'sprint'
 
-    def calculate(self):
+    def calculate(self) -> None:
         """Read user input, validate it, and display calculated fuel values."""
 
         race_duration = self.root.ids.race_time.text

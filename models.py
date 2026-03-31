@@ -8,14 +8,14 @@ class RaceConfig:
 
     def __init__(
             self,
-            race_duration_min,
-            lap_time,
-            fuel_per_lap,
-            laps=None,
-            fuel_needed=None,
-            fuel_with_one_extra_lap=None,
-            exceeds_tank=None
-            ):
+            race_duration_min: float,
+            lap_time: int,
+            fuel_per_lap: float,
+            laps: int | None = None,
+            fuel_needed: int | None = None,
+            fuel_with_one_extra_lap: int | None = None,
+            exceeds_tank: bool | None = None
+            ) -> None:
         """Initialize race configuration and optional precomputed outputs.
 
         Args:
@@ -35,7 +35,7 @@ class RaceConfig:
         self.fuel_with_one_extra_lap = fuel_with_one_extra_lap
         self.exceeds_tank = exceeds_tank
 
-    def calculate(self):
+    def calculate(self) -> None:
         """Compute laps and fuel values using shared calculation helpers."""
         self.laps = calculate_laps_from_time(
             self.race_duration_min,
@@ -45,7 +45,7 @@ class RaceConfig:
             calculate_fuel_needed(self.laps, self.fuel_per_lap)
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return a multiline human-readable race summary."""
         return f"""
         Race duration: {self.race_duration_min} min
@@ -61,7 +61,7 @@ class RaceConfig:
 class SprintRace(RaceConfig):
     """Specialized race model for sprint sessions."""
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return a sprint-specific multiline race summary."""
         return f"""
         Race type: Sprint

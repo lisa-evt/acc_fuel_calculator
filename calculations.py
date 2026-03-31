@@ -13,7 +13,11 @@ from constants import (
 )
 
 
-def validate_input(value, min_val, max_val):
+def validate_input(
+    value: str | int | float,
+    min_val: int | float,
+    max_val: int | float
+) -> float:
     """Validate numeric input and check that it lies within a range.
 
     Args:
@@ -38,7 +42,7 @@ def validate_input(value, min_val, max_val):
         raise ValueError(f'Value must be between {min_val} and {max_val}')
 
 
-def validate_lap_time(lap_time_str):
+def validate_lap_time(lap_time_str: str) -> int:
     """Validate lap time in ``mm:ss`` format and convert it to seconds.
 
     Args:
@@ -73,11 +77,11 @@ def validate_lap_time(lap_time_str):
     else:
         raise ValueError(
             f'Lap time must be between {MIN_LAP_TIME_SEC}'
-            f'and {MAX_LAP_TIME_SEC}'
+            f' and {MAX_LAP_TIME_SEC}'
             )
 
 
-def validate_fuel_per_lap(fuel_str):
+def validate_fuel_per_lap(fuel_str: str | int | float) -> float:
     """Validate fuel consumption per lap.
 
     Args:
@@ -86,11 +90,14 @@ def validate_fuel_per_lap(fuel_str):
     Returns:
         float: Parsed fuel value.
     """
-    fuel_per_lap = validate_input(fuel_str, MIN_FUEL_PER_LAP, MAX_FUEL_PER_LAP)
-    return fuel_per_lap
+
+    return validate_input(fuel_str, MIN_FUEL_PER_LAP, MAX_FUEL_PER_LAP)
 
 
-def calculate_laps_from_time(race_duration, lap_time):
+def calculate_laps_from_time(
+    race_duration: int | float,
+    lap_time: int | float
+) -> int:
     """Calculate estimated number of laps for a timed race.
 
     Args:
@@ -105,7 +112,10 @@ def calculate_laps_from_time(race_duration, lap_time):
     return ceil(total_laps)
 
 
-def calculate_fuel_needed(total_laps, fuel_per_lap):
+def calculate_fuel_needed(
+    total_laps: int,
+    fuel_per_lap: int | float
+) -> tuple[int, int, bool]:
     """Calculate base fuel, buffered fuel, and tank limit flag.
 
     Args:

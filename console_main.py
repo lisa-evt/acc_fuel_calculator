@@ -9,7 +9,7 @@ from models import SprintRace
 from constants import MIN_SPRINT_RACE_DURATION, MAX_SPRINT_RACE_DURATION
 
 
-def run_console_calculator():
+def run_console_calculator() -> None:
     """Run interactive CLI flow and print sprint fuel calculation results."""
     print('🏎️  ACC Sprint Race Fuel Calculator  🏎️')
     print('Enter your race details below.')
