@@ -1,5 +1,8 @@
 """Kivy application entry point for the ACC fuel calculator."""
 
+import os
+import sys
+
 from kivy.app import App  # type: ignore
 from calculations import (
     validate_input,
@@ -13,6 +16,10 @@ from constants import (
     MAX_SPRINT_RACE_DURATION
 )
 
+def resource_path(filename):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, filename)
+    return filename
 
 class FuelCalculatorApp(App):
     """Main Kivy application that handles screen switching"""
@@ -60,6 +67,11 @@ class FuelCalculatorApp(App):
         except ValueError as e:
             self.root.ids.result_label.text = str(e)
 
+
+    def build(self):
+        from kivy.resources import resource_add_path
+        resource_add_path(resource_path(''))
+        self.icon = resource_path('icon.icns')
 
 if __name__ == '__main__':
     FuelCalculatorApp().run()
