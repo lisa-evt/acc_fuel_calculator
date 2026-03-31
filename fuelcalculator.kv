@@ -1,0 +1,125 @@
+AnchorLayout:
+    anchor_x: 'center'
+    anchor_y: 'center'
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 1, None
+        height: self.minimum_height
+        spacing: 60
+        padding: 70
+
+        # Title
+        Label:
+
+            font_name: 'Orbitron.ttf'
+
+            text: 'FUEL CALCULATOR'
+            font_size: '60sp'
+            size_hint_y: None
+            height: 200
+
+        # Mode selection (Sprint / Endurance)
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            spacing: 30
+
+
+            ToggleButton:
+                font_name: 'Orbitron.ttf'
+                text: 'Sprint'
+                group: 'race_mode'
+                state: 'down'
+                font_size: '20sp'
+
+            ToggleButton:
+                font_name: 'Orbitron.ttf'
+                text: 'Endurance'
+                group: 'race_mode'
+                font_size: '20sp'
+
+        # Inputs block
+        GridLayout:
+
+            font_name: 'Orbitron.ttf'
+
+            cols: 2
+            spacing: 40
+            size_hint_y: None
+            height: self.minimum_height
+
+            # Race time
+            Label:
+                text: 'Race time:'
+                font_name: 'Orbitron.ttf'
+                halign: 'left'
+                valign: 'middle'
+                font_size: '30sp'
+
+
+            TextInput:
+                id: race_time
+                hint_text: 'minutes'
+                font_name: 'Orbitron.ttf'
+                multiline: False
+                size_hint_y: None
+                height: 80
+                font_size: '20sp'
+                halign: 'center'
+                padding_y: [20, 20]
+
+            # Lap time
+            Label:
+                text: 'Lap time:'
+                font_name: 'Orbitron.ttf'
+                halign: 'left'
+                valign: 'middle'
+                font_size: '30sp'
+
+            TextInput:
+                id: lap_time
+                hint_text: 'mm:ss'
+                font_name: 'Orbitron.ttf'
+                multiline: False
+                size_hint_y: None
+                height: 80
+                font_size: '20sp'
+                halign: 'center'
+                padding_y: [20, 20]
+
+            # Fuel per lap
+            Label:
+                text: 'Fuel per lap:'
+                font_name: 'Orbitron.ttf'
+                halign: 'left'
+                valign: 'middle'
+                font_size: '30sp'
+
+            TextInput:
+                id: fuel_per_lap
+                hint_text: 'liters'
+                font_name: 'Orbitron.ttf'
+                multiline: False
+                size_hint_y: None
+                height: 80
+                font_size: '20sp'
+                halign: 'center'
+                padding_y: [20, 20]
+
+        # Calculate button
+        Button:
+            font_name: 'Orbitron.ttf'
+            text: 'Calculate'
+            size_hint_y: None
+            height: 80
+            font_size: '30sp'
+
+        # Result output
+        Label:
+            font_name: 'Orbitron.ttf'
+            id: result_label
+            text: 'Result will appear here'
+            font_size: '25sp'
+            size_hint_y: None
+            height: 40
