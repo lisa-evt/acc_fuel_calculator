@@ -1,0 +1,76 @@
+name: Build Desktop (macOS + Windows)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    tags: [ "v*" ]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install deps (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirments.txt ]; then pip install -r requirments.txt; fi
+          pip install kivy pyinstaller
+
+      - name: Install deps (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          if (Test-Path requirements.txt) { pip install -r requirements.txt }
+          if (Test-Path requirments.txt) { pip install -r requirments.txt }
+          pip install kivy pyinstaller
+
+      - name: Build app (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          pyinstaller --noconfirm --clean --windowed \
+            --name ACCFuelCalculator \
+            --add-data "fuelcalculator.kv:." \
+            --add-data "Orbitron.ttf:." \
+            main.py
+
+      - name: Build app (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          pyinstaller --noconfirm --clean --windowed `
+            --name ACCFuelCalculator `
+            --add-data "fuelcalculator.kv;." `
+            --add-data "Orbitron.ttf;." `
+            main.py
+
+      - name: Upload macOS artifact
+        if: runner.os == 'macOS'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ACCFuelCalculator-macOS
+          path: dist/ACCFuelCalculator.app
+
+      - name: Upload Windows artifact
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ACCFuelCalculator-Windows
+          path: dist/ACCFuelCalculator

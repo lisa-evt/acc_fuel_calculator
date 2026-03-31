@@ -7,7 +7,11 @@ from calculations import (
     validate_fuel_per_lap
     )
 from models import SprintRace
-from constants import MIN_SPRINT_RACE_DURATION, MAX_SPRINT_RACE_DURATION
+from constants import (
+    MAX_FUEL_CAPACITY,
+    MIN_SPRINT_RACE_DURATION,
+    MAX_SPRINT_RACE_DURATION
+)
 
 
 class FuelCalculatorApp(App):
@@ -44,6 +48,14 @@ class FuelCalculatorApp(App):
                 f' Fuel: {race.fuel_needed}L  |'
                 f' With buffer: {race.fuel_with_one_extra_lap}L'
             )
+
+            race.calculate()
+
+            if race.exceeds_tank:
+                self.root.ids.result_label.text += (
+                    f'Warning: fuel exceeds tank capacity'
+                    f' ({MAX_FUEL_CAPACITY}L)!'
+                )
 
         except ValueError as e:
             self.root.ids.result_label.text = str(e)
