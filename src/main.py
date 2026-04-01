@@ -17,6 +17,9 @@ from constants import (
     MAX_SPRINT_RACE_DURATION
 )
 
+if platform.system() == 'Windows':
+    import ctypes
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID('acc.fuel.calculator')
 
 def resource_path(filename):
     if hasattr(sys, '_MEIPASS'):
