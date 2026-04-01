@@ -58,8 +58,6 @@ class FuelCalculatorApp(App):
                 f' With buffer: {race.fuel_with_one_extra_lap}L'
             )
 
-            race.calculate()
-
             if race.exceeds_tank:
                 self.root.ids.result_label.text += (
                     f'Warning: fuel exceeds tank capacity'
@@ -72,11 +70,11 @@ class FuelCalculatorApp(App):
     def build(self):
         """Build the Kivy application and set the window icon."""
         from kivy.resources import resource_add_path
-        resource_add_path(resource_path(''))
         if platform.system() == 'Windows':
             self.icon = resource_path('app_icon.ico')
         else:
             self.icon = resource_path('icon.icns')
+        resource_add_path(resource_path(''))
 
 if __name__ == '__main__':
     FuelCalculatorApp().run()
