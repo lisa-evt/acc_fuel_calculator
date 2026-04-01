@@ -16,6 +16,12 @@ from constants import (
     MAX_SPRINT_RACE_DURATION
 )
 
+from kivy.config import Config
+Config.set('graphics', 'minimum_width', '800')
+Config.set('graphics', 'minimum_height', '600')
+Config.set('graphics', 'width', '1000')
+Config.set('graphics', 'height', '700')
+
 def resource_path(filename):
     if hasattr(sys, '_MEIPASS'):
         return os.path.join(sys._MEIPASS, filename)
