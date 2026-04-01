@@ -54,13 +54,13 @@ def validate_lap_time(lap_time_str: str) -> int:
     Raises:
         ValueError: If format is invalid or value is out of configured range.
     """
-    lap_time_str = lap_time_str.split(':')
-    if len(lap_time_str) != 2:
+    parts = lap_time_str.split(':')
+    if len(parts) != 2:
         raise ValueError('Lap time must be mm:ss')
 
     try:
-        lap_time_min = int(lap_time_str[0])
-        lap_time_sec = int(lap_time_str[1])
+        lap_time_min = int(parts[0])
+        lap_time_sec = int(parts[1])
     except ValueError as exc:
         raise ValueError('Lap time must be mm:ss') from exc
 
