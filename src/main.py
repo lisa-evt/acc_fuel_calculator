@@ -2,6 +2,7 @@
 
 import os
 import sys
+import platform
 
 from kivy.app import App  # type: ignore
 from calculations import (
@@ -16,11 +17,6 @@ from constants import (
     MAX_SPRINT_RACE_DURATION
 )
 
-from kivy.config import Config
-Config.set('graphics', 'minimum_width', '800')
-Config.set('graphics', 'minimum_height', '600')
-Config.set('graphics', 'width', '1000')
-Config.set('graphics', 'height', '700')
 
 def resource_path(filename):
     if hasattr(sys, '_MEIPASS'):
@@ -73,11 +69,14 @@ class FuelCalculatorApp(App):
         except ValueError as e:
             self.root.ids.result_label.text = str(e)
 
-
     def build(self):
+        """Build the Kivy application and set the window icon."""
         from kivy.resources import resource_add_path
         resource_add_path(resource_path(''))
-        self.icon = resource_path('icon.icns')
+        if platform.system() == 'Windows':
+            self.icon = resource_path('app_icon.ico')
+        else:
+            self.icon = resource_path('icon.icns')
 
 if __name__ == '__main__':
     FuelCalculatorApp().run()
